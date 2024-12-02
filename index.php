@@ -1,3 +1,7 @@
+<?php
+include('./koneksi.php');
+?>
+
 <html>
 
 <head>
@@ -20,22 +24,32 @@
     <thead>
       <tr>
         <td>No</td>
-        <td>Kegiatan</td>
-        <td>Waktu</td>
+        <td>Nama Acara</td>
+        <td>Tanggal Acara</td>
+        <td>Prioritas</td>
         <td>Aksi</td>
       </tr>
     </thead>
     <tbody>
       <!-- //TODO fetch all data -->
-      <tr>
-        <td>1</td>
-        <td>Menulis</td>
-        <td>02-12-2024 12:00:00</td>
-        <td>
-          <a href="edit.php?id=1">Edit</a>
-          <a href="aksi/delete.php?id=1">Delete</a>
-        </td>
-      </tr>
+      <?php
+      $data = mysqli_query($koneksi, "select * from data_admin");
+      $no = 1;
+      while ($row = mysqli_fetch_assoc($data)) {
+
+      ?>
+        <tr>
+          <td><?= $no++ ?></td>
+          <td><?= $row['username'] ?></td>
+          <td>02-12-2024 12:00:00</td>
+          <td>02-12-2024 12:00:00</td>
+          <td>
+            <a href="edit.php?id=1">Edit</a>
+            <a href="aksi/delete.php?id=<?= $row['id_admin'] ?>">Delete</a>
+          </td>
+        </tr>
+
+      <?php } ?>
     </tbody>
   </table>
 </body>
